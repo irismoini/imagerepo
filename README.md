@@ -8,12 +8,8 @@ allows for the creation of new users, and associates users with images they have
 In order to use this application, MySQL must be installed and configured for your user. 
 All Python requirements are listed in requirements.txt and must be installed. 
 
-From the command line set the enviroment variables as below:
-`export FLASK_APP=server`
-`export FLASK_ENV=development`
-To start the server run:
-`flask run` 
- and follow the link provided.
+From the command line set the enviroment variables: `export FLASK_APP=server` and `export FLASK_ENV=development`.
+To start the server run `flask run` and follow the link provided.
 
 This will take users to a sign-in page. Anyone (even those without an account) can view public images by clicking the Public Images button in the top left corner. Individuals who are not logged in will not be allowed to upload an image or view their private images and will be redirected to sign-in. 
  
