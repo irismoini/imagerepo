@@ -96,12 +96,17 @@ def sendImage():
         return 'image does not exist', 404
     
     if img.public==True:
-        return send_file(img.path, mimetype='image/gif')
+        resp = send_file(img.path, mimetype='image/gif')
+        resp.headers["Cache-Control"] = "no-cache"
+        return resp
     else:
         userId=getUser(request)
         if userId is not None:
             if userId==img.user:
-                return send_file(img.path, mimetype='image/gif')
+                resp = send_file(img.path, mimetype='image/gif')
+                resp.headers["Cache-Control"] = "no-cache"
+                return resp
+
     return 'image does not belong to user',403
   
 @app.route('/public')

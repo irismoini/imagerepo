@@ -2,6 +2,7 @@ import mysql.connector as mysql
 
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class ImageResult:
     id: str
@@ -19,23 +20,27 @@ class UserResult:
 
 class DB:
     def __init__(self):
+        db_connection = mysql.connect(
+            host = "localhost",
+            user = "root",
+            passwd = "imagerepo",
+        )
+        connection_cursor = db_connection.cursor()
+
+        connection_cursor.execute("CREATE DATABASE if NOT EXISTS imagerepo")
         self.db = mysql.connect(
             host = "localhost",
             user = "root",
             passwd = "imagerepo",
             database="imagerepo",
         )
-        
         self.cursor = self.db.cursor()
 
-    #used to intialize database tables
-    def initDb(self):
-        self.cursor.execute("CREATE TABLE Users (user_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT NULL UNIQUE, name VARCHAR (255) NOT NULL, password_hash BINARY(32) NOT NULL, salt BINARY(32) NOT NULL)")
-        self.cursor.execute("CREATE TABLE Images (img_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, img_path TEXT(3200) NOT NULL, privacy_setting BOOL NOT NULL, user_id INT(11) NOT NULL, FOREIGN KEY(user_id) REFERENCES Users(user_id))")
-    
-    def deleteDBTables(self):
-        self.cursor.execute("DROP TABLE Images")
-        self.cursor.execute("DROP TABLE Users")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS Users (user_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT NULL UNIQUE, name VARCHAR (255) NOT NULL, password_hash BINARY(32) NOT NULL, salt BINARY(32) NOT NULL)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS Images (img_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, img_path TEXT(3200) NOT NULL, privacy_setting BOOL NOT NULL, user_id INT(11) NOT NULL, FOREIGN KEY(user_id) REFERENCES Users(user_id))")
+
+    def deleteDB(self):
+        self.cursor.execute("DROP DATABASE imagerepo")
 
     #operations for Images table
     def insertImg(self,imgPath, userId, publicSetting):
@@ -112,9 +117,9 @@ class DB:
 
 
 if __name__=="__main__":
+    import sys
     db=DB()
-    db.deleteDBTables()
-    db.initDb()
-        
+    if len(sys.argv) >= 2 and sys.argv[1] == 'drop':
+        db.deleteDB() 
 
 
