@@ -5,7 +5,7 @@ allows for the creation of new users, and associates users with images they have
 
 # Usage and Installation
 
-In order to use this application, MySQL must be installed and a database called imagerepo must be created. All Python requirements are listed in requirements.txt and must be installed. 
+In order to use this application, MySQL must be installed. All Python requirements are listed in requirements.txt and must be installed. 
 
 From the command line run `flask run` to start the server and follow the link provided.
 
