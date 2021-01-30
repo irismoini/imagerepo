@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload an Image</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <form method=post enctype=multipart/form-data>
+        <input type=file name=image>
+        <input type="radio" name="privacySetting" value="Public" >
+        <label for = "sizeMed">Public</label>
+        <input type="radio" name="privacySetting" value="Private" checked>
+        <label for = "sizeMed">Private</label>
+        <input type=submit value=Upload>
+      </form>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="static/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <title>My Images</title>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+
+  <div>
+    <p class="submit2" align="center"><a href="upload">Upload an image</a></p>
+  </div>
+
+  <div>
+    <p class="submit2" align="center"><a href="public">Public Images</a></p>
+  </div>
+
+  <div>
+    <p class="submit2" align="center"><a href="logout">Logout</a></p>
+  </div>
+
+  <p class="sign" align="center">Your Images</p>
+
+  <p class="sign1">Public Images</p>
+  <div class="gallery">
+    {% for item in public %}
+    <figure>
+      <img src="/images?imageid={{item}}" width="250" height="250">
+    </figure>
+    {% endfor %}
+
+  </div>
+  
+  <p class="sign1">Private Images</p>
+  <div class="gallery">
+
+    {% for item in private %}
+    <figure>
+      <img src="/images?imageid={{item}}" width="250" height="250">
+    </figure>
+    {% endfor %}
+  </div>
+
+</body>
+
+</html>
